@@ -1,0 +1,24 @@
+/**
+ * LeetCode: Check if Array Is Sorted and Rotated
+ * 
+ * This method checks whether the given array is sorted in non-decreasing order
+ * and then rotated at most once.
+ */
+public class SortedRotatedArray {
+
+    public boolean isSortedAndRotated(int[] nums) {
+        int n = nums.length;
+        int breaks = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > nums[(i + 1) % n]) {
+                breaks++;
+            }
+            if (breaks > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
