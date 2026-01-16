@@ -1,0 +1,77 @@
+/**
+ * Program to find the second largest element in an array
+ *
+ * ---------------------------------------------
+ * Approach 1: Optimal (Single Pass)
+ * ---------------------------------------------
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ *
+ * ---------------------------------------------
+ * Approach 2: Two Pass Solution
+ * ---------------------------------------------
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+public class SecondLargestElement {
+
+    /* -------------------------------------------------
+       Approach 1: Optimal Single-Pass Solution
+       ------------------------------------------------- */
+    public static int getSecondLargestOptimal(int[] arr) {
+        int largest = Integer.MIN_VALUE;
+        int secondLargest = Integer.MIN_VALUE;
+
+        for (int element : arr) {
+            if (element > largest) {
+                secondLargest = largest;
+                largest = element;
+            } else if (element < largest && element > secondLargest) {
+                secondLargest = element;
+            }
+        }
+
+        // If second largest does not exist
+        if (secondLargest == Integer.MIN_VALUE) {
+            return -1;
+        }
+
+        return secondLargest;
+    }
+
+    /* -------------------------------------------------
+       Approach 2: Two-Pass Solution
+       ------------------------------------------------- */
+    public static int getSecondLargestTwoPass(int[] arr) {
+        int largest = arr[0];
+
+        // First pass: find largest
+        for (int element : arr) {
+            if (element > largest) {
+                largest = element;
+            }
+        }
+
+        int secondLargest = Integer.MIN_VALUE;
+
+        // Second pass: find second largest
+        for (int element : arr) {
+            if (element < largest && element > secondLargest) {
+                secondLargest = element;
+            }
+        }
+
+        return secondLargest == Integer.MIN_VALUE ? -1 : secondLargest;
+    }
+
+    // Driver code
+    public static void main(String[] args) {
+        int[] arr = {1, 8, 7, 56, 90};
+
+        System.out.println("Second Largest (Optimal): " +
+                getSecondLargestOptimal(arr));
+
+        System.out.println("Second Largest (Two Pass): " +
+                getSecondLargestTwoPass(arr));
+    }
+}
